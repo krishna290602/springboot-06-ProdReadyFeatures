@@ -1,0 +1,23 @@
+package com.springboot.sb_04_01_BasicSetup.advice;
+
+import lombok.Data;
+import org.springframework.http.HttpStatus;
+
+import java.time.LocalDateTime;
+
+@Data
+public class ApiError {
+    private LocalDateTime timestamp;
+    private String errorMessage;
+    private HttpStatus statusCode;
+
+    public ApiError(){
+        this.timestamp = LocalDateTime.now();
+    }
+
+    public ApiError(String errorMessage, HttpStatus statusCode) {
+        this();
+        this.errorMessage = errorMessage;
+        this.statusCode = statusCode;
+    }
+}
