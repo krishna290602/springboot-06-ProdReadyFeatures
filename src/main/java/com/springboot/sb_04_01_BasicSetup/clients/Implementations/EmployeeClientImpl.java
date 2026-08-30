@@ -4,6 +4,8 @@ import com.springboot.sb_04_01_BasicSetup.advice.ApiResponse;
 import com.springboot.sb_04_01_BasicSetup.clients.EmployeeClient;
 import com.springboot.sb_04_01_BasicSetup.dto.EmployeeDTO;
 import com.springboot.sb_04_01_BasicSetup.exceptions.ResourceNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatusCode;
@@ -20,8 +22,17 @@ public class EmployeeClientImpl implements EmployeeClient {
     @Autowired
     private RestClient restClient;
 
+    Logger log = LoggerFactory.getLogger(EmployeeClientImpl.class);
+
     @Override
     public List<EmployeeDTO> getAllEmployees() {
+
+        log.error("error log");
+        log.warn("warning log");
+        log.info("information log");    //default logging level(error to info enabled)
+        log.debug("debugging log");
+        log.trace("trace log");
+
         try {
             ApiResponse<List<EmployeeDTO>> empDtoList = restClient.get()
                     .uri("employees")
@@ -31,6 +42,7 @@ public class EmployeeClientImpl implements EmployeeClient {
             return empDtoList.getData();
         }
         catch (RestClientException ex) {
+            log.error("Exception Occured while Fetching the Employee List", ex);
             throw new RuntimeException(ex);
         }
     }
@@ -42,6 +54,7 @@ public class EmployeeClientImpl implements EmployeeClient {
                     .uri("employees/{empId}", id)
                     .retrieve()
                     .body(new ParameterizedTypeReference<>() {});
+            log.info("Successfully fetched all employees");
 
             return employeeDtoRespone.getData();
         }

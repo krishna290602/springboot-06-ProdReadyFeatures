@@ -1,0 +1,33 @@
+2026-08-30T19:01:01.894+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [main] c.s.s.Sb0401BasicSetupApplicationTests   : Starting Sb0401BasicSetupApplicationTests using Java 21.0.10 with PID 19360 (started by krish in C:\Users\krish\Documents\4. Docs\4. Codes\2. Back End\2. Spring Boot 2.0\4. Prod Ready SB Features\sb_04_01_BasicSetup)
+2026-08-30T19:01:01.896+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [main] c.s.s.Sb0401BasicSetupApplicationTests   : No active profile set, falling back to 1 default profile: "default"
+2026-08-30T19:01:02.530+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-30T19:01:02.600+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 46 ms. Found 1 JPA repository interface.
+2026-08-30T19:01:03.208+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-08-30T19:01:03.254+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-08-30T19:01:03.794+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-30T19:01:03.824+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-08-30T19:01:03.977+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@58afecfd
+2026-08-30T19:01:03.980+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-08-30T19:01:04.084+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/prod-ready-features?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.45
+	Default catalog/schema: prod-ready-features/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-08-30T19:01:04.817+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-08-30T19:01:04.875+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-30T19:01:05.109+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-08-30T19:01:05.324+05:30  WARN 19360 --- [sb_04_01_BasicSetup] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-30T19:01:05.823+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [main] c.s.s.Sb0401BasicSetupApplicationTests   : Started Sb0401BasicSetupApplicationTests in 4.28 seconds (process running for 5.691)
+2026-08-30T19:01:06.136+05:30 ERROR 19360 --- [sb_04_01_BasicSetup] [main] c.s.s.c.I.EmployeeClientImpl             : error log
+2026-08-30T19:01:06.137+05:30  WARN 19360 --- [sb_04_01_BasicSetup] [main] c.s.s.c.I.EmployeeClientImpl             : warning log
+2026-08-30T19:01:06.137+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [main] c.s.s.c.I.EmployeeClientImpl             : information log
+2026-08-30T19:01:06.272+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-30T19:01:06.274+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-08-30T19:01:06.281+05:30  INFO 19360 --- [sb_04_01_BasicSetup] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
