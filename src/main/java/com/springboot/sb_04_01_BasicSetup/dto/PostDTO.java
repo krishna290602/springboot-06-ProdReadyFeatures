@@ -1,9 +1,15 @@
 package com.springboot.sb_04_01_BasicSetup.dto;
 
+import java.time.LocalDateTime;
+
 public class PostDTO {
     private Long id;
     private String title;
     private String description;
+    private LocalDateTime createdDate;
+    private LocalDateTime updateDate;
+    private String createdBy;
+    private String updatedBy;
 
     public PostDTO() {}
 
@@ -39,5 +45,37 @@ public class PostDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
     }
 }
