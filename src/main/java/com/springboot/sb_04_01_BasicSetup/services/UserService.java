@@ -1,22 +1,58 @@
 package com.springboot.sb_04_01_BasicSetup.services;
 
+import com.springboot.sb_04_01_BasicSetup.dto.LoginDTO;
+import com.springboot.sb_04_01_BasicSetup.dto.SignUpDTO;
+import com.springboot.sb_04_01_BasicSetup.dto.UserDTO;
+import com.springboot.sb_04_01_BasicSetup.entities.UserEntity;
 import com.springboot.sb_04_01_BasicSetup.exceptions.ResourceNotFoundException;
 import com.springboot.sb_04_01_BasicSetup.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-//@Service
+import java.util.Optional;
+
+@Service
+@RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByEmail(username)
                 .orElseThrow(()-> new ResourceNotFoundException("User with Email: "+ username +" not found."));
     }
+
+    public UserEntity loadUserById(Long userId) throws UsernameNotFoundException {
+        return userRepository.findById(userId)
+                .orElseThrow(()-> new ResourceNotFoundException("User with Id: "+ userId +" not found."));
+    }
+
+    public UserDTO signUp(SignUpDTO signUpDto) {
+        // check if user with same credentials already exist or not.
+        Optional<UserEntity> user = userRepository.findByEmail(signUpDto.getEmail());
+        if(user.isPresent()){
+            throw new BadCredentialsException("User with Email: "+ signUpDto.getEmail() +" already exists");
+        }
+        else{
+            UserEntity toCreate = modelMapper.map(signUpDto, UserEntity.class);
+            toCreate.setPassword(passwordEncoder.encode(toCreate.getPassword()));
+
+            return modelMapper.map(userRepository.save(toCreate), UserDTO.class);
+        }
+    }
+
+
 }
