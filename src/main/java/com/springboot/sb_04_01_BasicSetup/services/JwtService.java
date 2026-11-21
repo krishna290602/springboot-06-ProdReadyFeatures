@@ -3,7 +3,6 @@ package com.springboot.sb_04_01_BasicSetup.services;
 import com.springboot.sb_04_01_BasicSetup.entities.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,14 +22,24 @@ public class JwtService {
         return Keys.hmacShaKeyFor(jwtSecretKey.getBytes(StandardCharsets.UTF_8));
     }
 
-    // Method to create/generate a JWT Token
-    public String generateToken(UserEntity user) {
+    // Method to create/generate a JWT Access Token
+    public String generateAccessToken(UserEntity user) {
         return Jwts.builder()
                 .subject(user.getId().toString())
                 .claim("email", user.getEmail())
                 .claim("roles", Set.of("ADMIN", "USER"))
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000*60))    // 60 secs
+                .expiration(new Date(System.currentTimeMillis() + 1000*60*10))    // 60 secs * 10 mins
+                .signWith(getSecretKey())
+                .compact();
+    }
+
+    // Method to create/generate a JWT Refresh Token
+    public String generateRefreshToken(UserEntity user) {
+        return Jwts.builder()
+                .subject(user.getId().toString())
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 1000L *60*60*24*30*6))    // 6 months
                 .signWith(getSecretKey())
                 .compact();
     }

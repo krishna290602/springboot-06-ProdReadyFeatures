@@ -23,7 +23,7 @@ class Sb0401BasicSetupApplicationTests {
 	@Test
 	void contextLoads() {
 		UserEntity user = new UserEntity(4L, "krishna@gmail.com", "1234", "krishna");
-		String token = jwtService.generateToken(user);
+		String token = jwtService.generateAccessToken(user);
 		System.out.println(token);
 		Long id = jwtService.getUserIdFromToken(token);
 		System.out.println("ID: " +  id);
