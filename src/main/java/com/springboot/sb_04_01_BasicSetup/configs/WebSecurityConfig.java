@@ -1,6 +1,7 @@
 package com.springboot.sb_04_01_BasicSetup.configs;
 
 import com.springboot.sb_04_01_BasicSetup.filters.JwtAuthFilter;
+import com.springboot.sb_04_01_BasicSetup.handlers.OAuth2SuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,12 +26,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
+    private final OAuth2SuccessHandler oAuth2SuccessHandler;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/posts", "/auth/**").permitAll()
+                        .requestMatchers("/posts", "/auth/**", "/home.html").permitAll()
 //                        .requestMatchers("/posts/**").hasAnyRole("ADMIN")
                         .anyRequest().authenticated())
                 // JFF - Disable CSRF Validation at backend
@@ -38,8 +40,11 @@ public class WebSecurityConfig {
                 // Disbale Sessions and session ID
                 .sessionManagement(sessionConfig -> sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .oauth2Login(oauth2Config -> oauth2Config
+                        .failureUrl("/login?error=true")
+                        .successHandler(oAuth2SuccessHandler));
 //                .sessionManagement(sessionConfig -> sessionConfig.maximumSessions(1))
-                .formLogin(Customizer.withDefaults());
+//                .formLogin(Customizer.withDefaults());
         // .formLogin(form -> form.disable());
 
         return httpSecurity.build();

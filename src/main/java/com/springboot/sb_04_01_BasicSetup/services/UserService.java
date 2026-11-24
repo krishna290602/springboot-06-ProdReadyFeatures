@@ -40,6 +40,15 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(()-> new ResourceNotFoundException("User with Id: "+ userId +" not found."));
     }
 
+    public UserEntity loadUserByEmail(String email) throws UsernameNotFoundException {
+        return userRepository.findByEmail(email)
+                .orElse(null);
+    }
+
+    public UserEntity saveNewUser(UserEntity newUser) {
+        return userRepository.save(newUser);
+    }
+
     public UserDTO signUp(SignUpDTO signUpDto) {
         // check if user with same credentials already exist or not.
         Optional<UserEntity> user = userRepository.findByEmail(signUpDto.getEmail());
